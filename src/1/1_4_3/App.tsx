@@ -1,7 +1,7 @@
 // 1_4_3 Write an expression inside JSX curly braces
 /* 
-  В приведенном ниже объекте полный URL изображения разделен на четыре части: базовый URL, imageId, imageSize и расширение файла.
-
+  В приведенном ниже объекте полный URL изображения разделен на четыре части: 
+	базовый URL, imageId, imageSize и расширение файла.
   Исправьте ошибку с заданием src в <img>.
 */
 
@@ -23,7 +23,7 @@ export default function TodoList() {
       <h1>{person.name}'s Todos</h1>
       <img
         className="avatar"
-        src="{baseUrl}{person.imageId}{person.imageSize}.jpg"
+        src={`${baseUrl}${person.imageId}${person.imageSize}.jpg`}
         alt={person.name}
       />
       <ul>
