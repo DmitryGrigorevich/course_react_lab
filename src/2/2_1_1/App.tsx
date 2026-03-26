@@ -1,6 +1,8 @@
 // 2_1_1 Fix an event handler
 /*
-Щелчок на этой кнопке должен переключить фон страницы между белым и черным. Однако при нажатии ничего не происходит. Исправьте проблему. (Не беспокойтесь о логике внутри handleClick - эта часть в порядке).
+Щелчок на этой кнопке должен переключить фон страницы между белым и черным. 
+Однако при нажатии ничего не происходит. 
+Исправьте проблему. (Не беспокойтесь о логике внутри handleClick - эта часть в порядке).
 */
 
 export default function LightSwitch() {
@@ -14,7 +16,7 @@ export default function LightSwitch() {
   }
 
   return (
-      <button onClick={handleClick()}>
+      <button onClick={handleClick}>
           Toggle the lights
       </button>
   );
