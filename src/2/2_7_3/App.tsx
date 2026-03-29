@@ -1,6 +1,8 @@
 // 2_7_3 Fix the mutations using non-mutative methods  
 /*
-    В этом примере все обработчики событий в App.js используют мутацию. В результате редактирование и удаление todos не работает. Перепишите handleAddTodo, handleChangeTodo и handleDeleteTodo, чтобы они использовали немутационные методы:
+    В этом примере все обработчики событий в App.js используют мутацию. 
+		В результате редактирование и удаление todos не работает. 
+		Перепишите handleAddTodo, handleChangeTodo и handleDeleteTodo, чтобы они использовали немутационные методы:
 */
 
 import { useState } from 'react';
@@ -13,7 +15,7 @@ export type Todo = {
     done: boolean;
 }
 
-let nextId = 3;
+
 const initialTodos = [
     { id: 0, title: 'Buy milk', done: true },
     { id: 1, title: 'Eat tacos', done: false },
@@ -24,26 +26,21 @@ export default function TaskApp() {
     const [todos, setTodos] = useState(initialTodos);
 
     function handleAddTodo(title: string) {
-        todos.push({
-            id: nextId++,
-            title: title,
-            done: false,
-        });
+			setTodos([...todos, {id: todos.length, title: title, done: false}])
+
     }
 
     function handleChangeTodo(nextTodo: Todo) {
-        const todo = todos.find(
-            (t) => t.id === nextTodo.id
-        )!!;
-        todo.title = nextTodo.title;
-        todo.done = nextTodo.done;
+			setTodos(todos.map((todo) => 
+				todo.id === nextTodo.id 
+				? {id: todo.id, title: nextTodo.title, done: nextTodo.done} 
+				: {...todo}))
+
     }
 
     function handleDeleteTodo(todoId: number) {
-        const index = todos.findIndex(
-            (t) => t.id === todoId
-        );
-        todos.splice(index, 1);
+			setTodos(todos.filter((todo) => todo.id != todoId))
+
     }
 
     return (
