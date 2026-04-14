@@ -1,6 +1,10 @@
 // 3_2_3 Fix a broken packing list
 /*
-    Этот упаковочный лист имеет нижний колонтитул, который показывает, сколько предметов упаковано, и сколько предметов в целом. Поначалу кажется, что это работает, но на самом деле это ошибка. Например, если вы пометите предмет как упакованный, а затем удалите его, счетчик не будет обновлен правильно. Исправьте счетчик так, чтобы он всегда был корректным.
+	Этот упаковочный лист имеет нижний колонтитул, который показывает, 
+	сколько предметов упаковано, и сколько предметов в целом. 
+	Поначалу кажется, что это работает, но на самом деле это ошибка. 
+	Например, если вы пометите предмет как упакованный, а затем удалите его, счетчик не будет обновлен правильно. 
+	Исправьте счетчик так, чтобы он всегда был корректным.
 */
 
 
@@ -24,7 +28,7 @@ const initialItems = [
 export default function TravelPlan() {
   const [items, setItems] = useState(initialItems);
   const [total, setTotal] = useState(3);
-  const [packed, setPacked] = useState(1);
+	const packed = items.filter(({packed}) => packed).length;
 
   function handleAddItem(title: string) {
     setTotal(total + 1);
@@ -37,13 +41,10 @@ export default function TravelPlan() {
       }
     ]);
   }
+	
 
   function handleChangeItem(nextItem: Item) {
-    if (nextItem.packed) {
-      setPacked(packed + 1);
-    } else {
-      setPacked(packed - 1);
-    }
+
     setItems(items.map(item => {
       if (item.id === nextItem.id) {
         return nextItem;
