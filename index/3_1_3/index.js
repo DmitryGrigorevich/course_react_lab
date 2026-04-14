@@ -1,53 +1,76 @@
+let firstName = 'Jane';
+let surname = 'Jacobs';
+let isEdit= false;
+
 function handleFormSubmit(e) {
-    e.preventDefault();
-    if (editButton.textContent === 'Edit Profile') {
-      editButton.textContent = 'Save Profile';
-      hide(firstNameText);
-      hide(lastNameText);
-      show(firstNameInput);
-      show(lastNameInput);
-    } else {
-      editButton.textContent = 'Edit Profile';
-      hide(firstNameInput);
-      hide(lastNameInput);
-      show(firstNameText);
-      show(lastNameText);
-    }
+  e.preventDefault();
+  setIsEditing(!isEdit);
+}
+
+function handleFirstNameChange(e) {
+  setFirstName(e.target.value);
+}
+
+function handleSurnameChange(e) {
+  setSurname(e.target.value);
+}
+
+function setFirstName(value) {
+  firstName = value;
+  updateDOM();
+}
+
+function setSurname(value) {
+  surname = value;
+  updateDOM();
+}
+
+function setIsEditing(value) {
+  isEdit = value;
+  updateDOM();
+}
+
+function updateDOM() {
+  if (isEdit) {
+    editButton.textContent = 'Save';
+    hide(firstNameText);
+    hide(surnameText);
+    show(firstNameInput);
+    show(surnameInput);
+  } else {
+    editButton.textContent = 'Edit';
+    hide(firstNameInput);
+    hide(surnameInput);
+    show(firstNameText);
+    show(surnameText);
   }
-  
-  function handleFirstNameChange() {
-    firstNameText.textContent = firstNameInput.value;
-    helloText.textContent = (
-      'Hello ' +
-      firstNameInput.value + ' ' +
-      lastNameInput.value + '!'
-    );
-  }
-  
-  function handleLastNameChange() {
-    lastNameText.textContent = lastNameInput.value;
-    helloText.textContent = (
-      'Hello ' +
-      firstNameInput.value + ' ' +
-      lastNameInput.value + '!'
-    );
-  }
-  
-  function hide(el) {
-    el.style.display = 'none';
-  }
-  
-  function show(el) {
-    el.style.display = '';
-  }
-  
-  let form = document.getElementById('form');
-  let editButton = document.getElementById('editButton');
-  let firstNameInput = document.getElementById('firstNameInput');
-  let firstNameText = document.getElementById('firstNameText');
-  let lastNameInput = document.getElementById('lastNameInput');
-  let lastNameText = document.getElementById('lastNameText');
-  let helloText = document.getElementById('helloText');
-  form.onsubmit = handleFormSubmit;
-  firstNameInput.oninput = handleFirstNameChange;
-  lastNameInput.oninput = handleLastNameChange;
+
+  firstNameInput.value = firstName;
+  surnameInput.value = surname;
+
+  firstNameText.textContent = firstName;
+  surnameText.textContent = surname;
+  helloText.textContent = 'Hello ' + firstName + ' ' + surname + '!';
+}
+
+function hide(el) {
+  el.style.display = 'none';
+}
+
+function show(el) {
+  el.style.display = '';
+}
+
+let form = document.getElementById('form');
+let editButton = document.getElementById('editButton');
+let firstNameInput = document.getElementById('firstNameInput');
+
+let firstNameText = document.getElementById('firstNameText');
+let surnameInput = document.getElementById('surnameInput');
+let surnameText = document.getElementById('surnameText');
+let helloText = document.getElementById('helloText');
+form.onsubmit = handleFormSubmit;
+firstNameInput.oninput = handleFirstNameChange;
+surnameInput.oninput = handleSurnameChange;
+
+updateDOM();
