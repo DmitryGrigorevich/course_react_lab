@@ -1,36 +1,34 @@
-import { LetterType } from './data';
+import { LetterType } from "./data";
 
 export default function Letter({
-    letter,
-    isHighlighted,
-    onHover,
-    onToggleStar,
-  }: {
-    letter: LetterType,
-    isHighlighted: boolean,
-    onHover: (letter: LetterType) => void,
-    onToggleStar: (letter: LetterType) => void,
-  }
-) {
-    return (
-      <li
-        className={
-          isHighlighted ? 'highlighted' : ''
-        }
-        onFocus={() => {
-          onHover(letter);        
-        }}
-        onPointerMove={() => {
-          onHover(letter);
+  letter,
+  isHighlighted,
+  onHover,
+  onToggleStar,
+}: {
+  letter: LetterType;
+  isHighlighted: boolean;
+  onHover: (id: LetterType["id"]) => void;
+  onToggleStar: (letter: LetterType) => void;
+}) {
+  return (
+    <li
+      className={isHighlighted ? "highlighted" : ""}
+      onFocus={() => {
+        onHover(letter.id);
+      }}
+      onPointerMove={() => {
+        onHover(letter.id);
+      }}
+    >
+      <button
+        onClick={() => {
+          onToggleStar(letter);
         }}
       >
-        <button onClick={() => {
-          onToggleStar(letter);
-        }}>
-          {letter.isStarred ? 'Unstar' : 'Star'}
-        </button>
-        {letter.subject}
-      </li>
-    )
-  }
-  
+        {letter.isStarred ? "Unstar" : "Star"}
+      </button>
+      {letter.subject}
+    </li>
+  );
+}
