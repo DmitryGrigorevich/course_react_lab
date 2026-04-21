@@ -1,23 +1,26 @@
-import { useState } from 'react';
-import { Action } from './messengerReducer';
-import { Contact } from './App';
+import { useState, useReducer } from "react";
+import { Action } from "./messengerReducer";
+import { Contact } from "./App";
 
-export default function Chat(
-    {
-        contact, message, dispatch
-    }:
-    {
-        contact: Contact,
-        message: string,
-        dispatch: (action: Action) => void
-    }
-) {
+export default function Chat({
+  contact,
+  message,
+  dispatch,
+}: {
+  contact: Contact;
+  message: string;
+  dispatch: (action: Action) => void;
+}) {
   return (
     <section className="chat">
       <textarea
         value={message}
-        placeholder={'Chat to ' + contact.name}
+        placeholder={"Chat to " + contact.name}
         onChange={(e) => {
+					dispatch({
+						type:'edited_message', 
+						message: e.target.value
+					})
           // TODO: dispatch edited_message
           // (Read the input value from e.target.value)
         }}
