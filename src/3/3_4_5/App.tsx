@@ -1,12 +1,31 @@
 // 3_4_5 Fix misplaced state in the list 
 /*
-  В этом списке каждый Contact имеет состояние, которое определяет, была ли для него нажата галочка "Показать почту". Нажмите "Показать почту" для Алисы, а затем установите флажок "Показывать в обратном порядке". Вы заметите, что письмо Тейлора теперь развернуто, а письмо Алисы, которое переместилось в самый низ, кажется свернутым.
+  В этом списке каждый Contact имеет состояние, которое определяет, 
+	была ли для него нажата галочка "Показать почту". 
+	Нажмите "Показать почту" для Алисы, а затем установите флажок "Показывать в обратном порядке". 
+	Вы заметите, что письмо Тейлора теперь развернуто, а письмо Алисы, 
+	которое переместилось в самый низ, кажется свернутым.
 
-  Исправьте это так, чтобы развернутое состояние было связано с каждым контактом, независимо от выбранного порядка.
+  Исправьте это так, чтобы развернутое состояние было связано с каждым контактом, 
+	независимо от выбранного порядка.
 */
 
 import { useState } from 'react';
 import Contact from './Contact';
+
+
+export type ContactType = {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const contacts: ContactType[] = [
+  { id: 0, name: 'Alice', email: 'alice@mail.com' },
+  { id: 1, name: 'Bob', email: 'bob@mail.com' },
+  { id: 2, name: 'Taylor', email: 'taylor@mail.com' }
+];
+
 
 export default function ContactList() {
   const [reverse, setReverse] = useState(false);
@@ -30,7 +49,7 @@ export default function ContactList() {
       </label>
       <ul>
         {displayedContacts.map((contact, i) =>
-          <li key={i}>
+          <li key={contact.id}>
             <Contact contact={contact} />
           </li>
         )}
@@ -38,15 +57,3 @@ export default function ContactList() {
     </>
   );
 }
-
-export type ContactType = {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const contacts: ContactType[] = [
-  { id: 0, name: 'Alice', email: 'alice@mail.com' },
-  { id: 1, name: 'Bob', email: 'bob@mail.com' },
-  { id: 2, name: 'Taylor', email: 'taylor@mail.com' }
-];
