@@ -8,7 +8,10 @@ export default function Counter() {
       setCount(c => c + 1);
     }
 
-    setInterval(onTick, 1000);
+		const tmpInterval = setInterval(onTick, 1000);
+		return () => clearInterval(tmpInterval)
+
+    
   }, []);
 
   return <h1>{count}</h1>;
