@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { ContactType } from "./App";
 
 export default function EditContact({
@@ -11,13 +11,9 @@ export default function EditContact({
   const [name, setName] = useState(savedContact.name);
   const [email, setEmail] = useState(savedContact.email);
 
-  useEffect(() => {
-    setName(savedContact.name);
-    setEmail(savedContact.email);
-  }, [savedContact]);
 
   return (
-    <section>
+    <section key={savedContact.id}>
       <label>
         Name:{" "}
         <input
@@ -36,12 +32,8 @@ export default function EditContact({
       </label>
       <button
         onClick={() => {
-          const updatedData = {
-            id: savedContact.id,
-            name: name,
-            email: email,
-          };
-          onSave(updatedData);
+					
+          onSave({id: savedContact.id, name, email});
         }}
       >
         Save
